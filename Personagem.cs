@@ -35,7 +35,7 @@ namespace AnalyzerGenshin
         }
         public override string ToString()
         {
-            return $"{nome} - {tipo}\nLevel: {level}";
+            return $"ID: {id}\nNome: {nome} - Tipo: {tipo}\nLevel: {level}\n";
         }
     }
 }

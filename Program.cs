@@ -15,6 +15,7 @@ namespace AnalyzerGenshin
                 {
                     case 1: CadastrarPersonagem() ;break;
                     case 2: CadastrarArtefato()   ;break;
+                    case 3: PersonagemListarNome();break;
 
                 }
 
@@ -89,12 +90,31 @@ namespace AnalyzerGenshin
                 Console.WriteLine();
                 Console.WriteLine("Tipo:");
                 Console.WriteLine();
-                Console.WriteLine("[1] Hydro");
-                Console.WriteLine("[2] Pyro");
-                Console.WriteLine("[3] Cryo");
-                Console.WriteLine("[4] Electro");
-                Console.WriteLine("[5] Geo");
-                Console.WriteLine("[6] Anemo");
+
+                Console.Write("[1] ");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine("Hidro");
+                Console.ResetColor();
+                Console.Write("[2] ");
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Pyro");
+                Console.ResetColor();
+                Console.Write("[3] ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Cryo");
+                Console.ResetColor();
+                Console.Write("[4] ");
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("Electro");
+                Console.ResetColor();
+                Console.Write("[5] ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("Geo");
+                Console.ResetColor();
+                Console.Write("[6] ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Anemo");
+                Console.ResetColor();
                 Console.WriteLine();
                 Console.Write("Digite: ");
                 int TipoC = int.Parse(Console.ReadLine());
@@ -131,8 +151,9 @@ namespace AnalyzerGenshin
         {
             try
             {
-                string nome, tipo, mainStatus, status1, status2, status3, status4;
-                int id, valorMainStatus, valorStatus1, valroStatus2, valorStatus3, valroStatus4;
+                string nome, tipo = "Default", mainStatus = "Default", status1, status2, status3, status4;
+                int id;
+                double valorMainStatus, valorStatus1, valorStatus2, valorStatus3, valorStatus4;
 
                 Console.WriteLine("Informaçoes do Seu Personagem:");
                 Console.WriteLine();
@@ -173,7 +194,7 @@ namespace AnalyzerGenshin
                 if (idTipo != 1 || idTipo != 2)
                 {
                     Console.WriteLine();
-                    Console.Write("Main Status: ");
+                    Console.WriteLine("Main Status: ");
                     Console.WriteLine("[1] HP%");
                     Console.WriteLine("[2] ATQ%");
                     Console.WriteLine("[3] DEF%");
@@ -212,6 +233,35 @@ namespace AnalyzerGenshin
                 status2 = Status(2);
                 status3 = Status(3);
                 status4 = Status(4);
+
+                Console.WriteLine();
+                Console.Write($"Valor Main Status {mainStatus}: ");
+                valorMainStatus = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor Status 1 {status1}: ");
+                valorStatus1 = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor Status 2 {status2}: ");
+                valorStatus2 = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor Status 3 {status3}: ");
+                valorStatus3 = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor Status 4 {status4}: ");
+                valorStatus4 = double.Parse(Console.ReadLine());
+
+                Artefato a = new Artefato(id, nome, tipo, mainStatus, status1, status2, status3, status4, valorMainStatus, valorStatus1, valorStatus2, valorStatus3, valorStatus4);
+                Sistema.ArtefatoInserir(a);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Artefato Cadastrado!");
+                Console.ResetColor();
+                Console.WriteLine();
             }
             catch (Exception)
             {
@@ -225,7 +275,7 @@ namespace AnalyzerGenshin
         static public string Status(int nmr)
         {
             Console.WriteLine();
-            Console.Write($"Status{nmr}: ");
+            Console.WriteLine($"Status {nmr}: ");
             Console.WriteLine("[1] HP%");
             Console.WriteLine("[2] ATQ%");
             Console.WriteLine("[3] DEF%");
@@ -243,7 +293,7 @@ namespace AnalyzerGenshin
             int idStatus;
                 do
                 {
-                    Console.Write($"Digite Status{nmr}:");
+                    Console.Write($"Digite Status {nmr}:");
                     idStatus = int.Parse(Console.ReadLine());
                 }while (idStatus > 10 || idStatus < 0);
 
@@ -261,6 +311,14 @@ namespace AnalyzerGenshin
                     case 10: tipo = "ATQ FLAT"  ; break;
                 }
             return tipo;
+        }
+        static public void PersonagemListarNome()
+        {
+            foreach(Personagem p in Sistema.PersonagemListar())
+            {
+                Console.WriteLine();
+                Console.WriteLine(p);
+            }
         }
     }
 }

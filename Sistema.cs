@@ -17,9 +17,23 @@ namespace AnalyzerGenshin
         {
             personagens.Remove(obj);
         }
-        public static List<Personagem> PersonagemListar(Personagem obj)
+        public static List<Personagem> PersonagemListar()
         {
-            return personagens;
+            List<Personagem> p = personagens;
+            p.Sort();
+            return p;
+        }
+        public static void ArtefatoInserir(Artefato obj)
+        {
+            artefatos.Add(obj);
+        }
+        public static void ArtefatoExcluir(Artefato obj)
+        {
+            artefatos.Remove(obj);
+        }
+        public static List<Artefato> ArtefatoListar(Artefato obj)
+        {
+            return artefatos;
         }
     }
 }
