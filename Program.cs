@@ -49,7 +49,7 @@ namespace AnalyzerGenshin
             catch (Exception)
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("===============================");
+                Console.WriteLine("================================");
                 Console.ResetColor();
                 
                 Console.ForegroundColor = ConsoleColor.DarkRed;
@@ -59,7 +59,7 @@ namespace AnalyzerGenshin
             if (M != -1)
             {
                 Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("===============================");
+                Console.WriteLine("================================");
                 Console.ResetColor();
             }
             
@@ -72,7 +72,7 @@ namespace AnalyzerGenshin
                 string nome;
                 int level, id;
 
-                Console.WriteLine("Informaçoes do Seu Personagem:");
+                Console.WriteLine("-=-= Cadastro do Personagem =-=-");
                 Console.WriteLine();
                 Console.Write("Id: ");
                 id = int.Parse(Console.ReadLine());
@@ -91,31 +91,34 @@ namespace AnalyzerGenshin
                 Console.WriteLine("Tipo:");
                 Console.WriteLine();
 
-                Console.Write("[1] ");
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                Console.WriteLine("Hidro");
-                Console.ResetColor();
-                Console.Write("[2] ");
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("Pyro");
-                Console.ResetColor();
-                Console.Write("[3] ");
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.WriteLine("Cryo");
-                Console.ResetColor();
-                Console.Write("[4] ");
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Electro");
-                Console.ResetColor();
-                Console.Write("[5] ");
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
-                Console.WriteLine("Geo");
-                Console.ResetColor();
-                Console.Write("[6] ");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Anemo");
-                Console.ResetColor();
-                Console.WriteLine();
+                {
+                    Console.Write("[1] ");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine("Hidro");
+                    Console.ResetColor();
+                    Console.Write("[2] ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Pyro");
+                    Console.ResetColor();
+                    Console.Write("[3] ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Cryo");
+                    Console.ResetColor();
+                    Console.Write("[4] ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("Electro");
+                    Console.ResetColor();
+                    Console.Write("[5] ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("Geo");
+                    Console.ResetColor();
+                    Console.Write("[6] ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Anemo");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+                
                 Console.Write("Digite: ");
                 int TipoC = int.Parse(Console.ReadLine());
 
@@ -155,7 +158,7 @@ namespace AnalyzerGenshin
                 int id;
                 double valorMainStatus, valorStatus1, valorStatus2, valorStatus3, valorStatus4;
 
-                Console.WriteLine("Informaçoes do Seu Personagem:");
+                Console.WriteLine("=-=-= Cadastro do Artefato =-=-=");
                 Console.WriteLine();
                 Console.Write("Id: ");
                 id = int.Parse(Console.ReadLine());
@@ -191,7 +194,8 @@ namespace AnalyzerGenshin
                     case 5: tipo = "TIARA"  ; break;
                 }
                 
-                if (idTipo != 1 || idTipo != 2)
+                Console.WriteLine(idTipo);
+                if (idTipo > 2)
                 {
                     Console.WriteLine();
                     Console.WriteLine("Main Status: ");
@@ -227,6 +231,18 @@ namespace AnalyzerGenshin
                         case 9: mainStatus = "Elemental DMG" ; break;
                         case 10: mainStatus = "Phisical DMG"  ; break;
                     }
+                }
+                if ( idTipo == 1)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Flor é unicamente VIDA FLAT.");
+                    Console.WriteLine();
+                }
+                if ( idTipo == 2)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Pena é unicamente ATQ FLAT.");
+                    Console.WriteLine();
                 }
 
                 status1 = Status(1);

@@ -1,6 +1,7 @@
+using System;
 namespace AnalyzerGenshin
 {
-    public class Artefato
+    public class Artefato : IComparable<Artefato>
     {
         private int id;
         private int idPersonagem;
@@ -36,6 +37,14 @@ namespace AnalyzerGenshin
         public override string ToString()
         {
             return $" {tipo} | {nome}\n {mainStatus} - {valorMainStatus}\n {status1} - {valorStatus1}\n {status2} - {valorStatus2}\n {status3} - {valorStatus3}\n {status4} - {valorStatus4}";
+        }
+        public string GetNome()
+        {
+            return nome;
+        }
+        public int CompareTo(Artefato Obj)
+        {
+            return GetNome().CompareTo(Obj.GetNome());
         }
     }
 }

@@ -31,9 +31,11 @@ namespace AnalyzerGenshin
         {
             artefatos.Remove(obj);
         }
-        public static List<Artefato> ArtefatoListar(Artefato obj)
+        public static List<Artefato> ArtefatoListar()
         {
-            return artefatos;
+            List<Artefato> a = artefatos;
+            a.Sort();
+            return a;
         }
     }
 }
