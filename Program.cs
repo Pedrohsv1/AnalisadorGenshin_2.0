@@ -122,6 +122,16 @@ namespace AnalyzerGenshin
                 Console.Write("Digite: ");
                 int TipoC = int.Parse(Console.ReadLine());
 
+                while(TipoC < 1 || TipoC > 6)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Tente digitar outro número");
+                    Console.ResetColor();
+                    Console.Write("Digite:");
+                    TipoC = int.Parse(Console.ReadLine());
+                }
+                Console.WriteLine();
+
                 string tipo;
                 tipo = "Default";
 
@@ -132,6 +142,27 @@ namespace AnalyzerGenshin
                 if (TipoC == 5) tipo = "Geo";
                 if (TipoC == 6) tipo = "Anemo";
 
+
+                int i = 0;
+                foreach(Artefato art in Sistema.ArtefatoListar())
+                {
+                    if(art.GetTipo() == "FLOR")
+                    {
+                        Console.WriteLine($"Artefato [{i+1}]");
+                        Console.WriteLine(art);
+                        i++;
+                    }
+                }
+                if( i == 0 )
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Cadatre uma Flor no menu você");
+                    Console.WriteLine("não possui uma ainda!");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+
                 Personagem p = new Personagem(id, level, nome, tipo, 1, 2, 3, 4);
                 Sistema.PersonagemInserir(p);
 
@@ -140,6 +171,7 @@ namespace AnalyzerGenshin
                 Console.WriteLine("Personagem Cadastrado!");
                 Console.ResetColor();
                 Console.WriteLine();
+
             }
             catch (Exception)
             {

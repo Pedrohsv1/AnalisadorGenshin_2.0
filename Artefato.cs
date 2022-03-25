@@ -36,7 +36,11 @@ namespace AnalyzerGenshin
         }
         public override string ToString()
         {
-            return $" {tipo} | {nome}\n {mainStatus} - {valorMainStatus}\n {status1} - {valorStatus1}\n {status2} - {valorStatus2}\n {status3} - {valorStatus3}\n {status4} - {valorStatus4}";
+            return $"\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus}\n\n {status1} - {valorStatus1}\n {status2} - {valorStatus2}\n {status3} - {valorStatus3}\n {status4} - {valorStatus4}";
+        }
+        public string GetTipo()
+        {
+            return tipo;
         }
         public string GetNome()
         {
