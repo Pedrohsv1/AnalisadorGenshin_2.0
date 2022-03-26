@@ -36,11 +36,15 @@ namespace AnalyzerGenshin
         }
         public override string ToString()
         {
-            return $"\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus}\n\n {status1} - {valorStatus1}\n {status2} - {valorStatus2}\n {status3} - {valorStatus3}\n {status4} - {valorStatus4}";
+            return $"\n Id - {id}\n\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus:0.0}\n\n {status1} - {valorStatus1:0.0}\n {status2} - {valorStatus2:0.0}\n {status3} - {valorStatus3:0.0}\n {status4} - {valorStatus4:0.0}";
         }
         public string GetTipo()
         {
             return tipo;
+        }
+        public int GetId()
+        {
+            return id;
         }
         public string GetNome()
         {

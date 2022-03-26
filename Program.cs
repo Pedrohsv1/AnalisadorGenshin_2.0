@@ -15,7 +15,7 @@ namespace AnalyzerGenshin
                 {
                     case 1: CadastrarPersonagem() ;break;
                     case 2: CadastrarArtefato()   ;break;
-                    case 3: MenuPersonagem();break;
+                    case 3: MenuPersonagem()      ;break;
                     case 4: ArtfeatoListarNome()  ;break;
 
                 }
@@ -360,6 +360,151 @@ namespace AnalyzerGenshin
                 Console.WriteLine();
             }
         }
+        static public void AtualizarPersonagem(Personagem p)
+        {
+            string tipo = "Default", nome = "Default";
+            int id = 0, level = 0;
+            try
+            {
+                Console.WriteLine("-=-= Atualizar o Personagem =-=-");
+                Console.WriteLine();
+                Console.Write("Id: ");
+                id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write("Nome: ");
+
+                nome = Console.ReadLine();
+
+                Console.WriteLine();
+                Console.Write("Level: ");
+
+                level = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.WriteLine("Tipo:");
+                Console.WriteLine();
+
+                {
+                    Console.Write("[1] ");
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    Console.WriteLine("Hydro");
+                    Console.ResetColor();
+                    Console.Write("[2] ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Pyro");
+                    Console.ResetColor();
+                    Console.Write("[3] ");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Cryo");
+                    Console.ResetColor();
+                    Console.Write("[4] ");
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                    Console.WriteLine("Electro");
+                    Console.ResetColor();
+                    Console.Write("[5] ");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("Geo");
+                    Console.ResetColor();
+                    Console.Write("[6] ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("Anemo");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
+                    
+                Console.Write("Digite: ");
+                int DadoTipo = int.Parse(Console.ReadLine());
+
+                while(DadoTipo < 1 || DadoTipo > 6)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Tente digitar outro número");
+                    Console.ResetColor();
+                    Console.Write("Digite:");
+                    DadoTipo = int.Parse(Console.ReadLine());
+                }
+                Console.WriteLine();
+                if (DadoTipo == 1) tipo = "Hydro";
+                if (DadoTipo == 2) tipo = "Pyro";
+                if (DadoTipo == 3) tipo = "Cryo";
+                if (DadoTipo == 4) tipo = "Electro";
+                if (DadoTipo == 5) tipo = "Geo";
+                if (DadoTipo == 6) tipo = "Anemo";
+            }
+            catch(Exception)
+            {
+                AtualizarPersonagem(p);
+            }         
+
+            p.SetNome(nome);
+            p.SetId(id);
+            p.SetLevel(level);
+            p.SetTipo(tipo);
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Personagem Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void NomePersonagem(Personagem p)
+        {
+            Console.WriteLine("-=-= Personagem Nome =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                string nome =Console.ReadLine();
+                p.SetNome(nome);
+            }
+            catch(Exception)
+            {
+                NomePersonagem(p);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Nome Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void LevelPersonagem(Personagem p)
+        {
+            Console.WriteLine("-=-= Personagem Level =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                int level = int.Parse(Console.ReadLine());
+                p.SetLevel(level);
+            }
+            catch(Exception)
+            {
+                LevelPersonagem(p);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Level Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void IdPersonagem(Personagem p)
+        {
+            Console.WriteLine("-=-= Personagem Id =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                int id = int.Parse(Console.ReadLine());
+                p.SetId(id);
+            }
+            catch(Exception)
+            {
+                IdPersonagem(p);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Level Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
         static public string Status(int nmr)
         {
             Console.WriteLine();
@@ -460,20 +605,92 @@ namespace AnalyzerGenshin
         }
         static public void MenuSubPersonagem(Personagem p)
         {
+            
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{p.GetNome()}");
             Console.ResetColor();
             Console.WriteLine($" - {p.GetTipo()}");
             Console.WriteLine();
             Console.WriteLine("[1] Mudar Dados");
             Console.WriteLine("[2] Artefatos");
-            Console.WriteLine("[3] Listar Personagens");
+            Console.WriteLine("[3] Listar Dados");
+            Console.Write("[4] ");
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("[4] Excluir");
-            Console.WriteLine("[0] Sair");
+            Console.WriteLine("Excluir");
+            Console.WriteLine("[0] Voltar");
             Console.ResetColor();
             Console.WriteLine();
+            int escolhaSubPersonagem = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaSubPersonagem < 0 || escolhaSubPersonagem > 4)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaSubPersonagem = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuSubPersonagem(p);
+            }
+            if(escolhaSubPersonagem == 0)
+            {
+                MenuPersonagem(p);
+            }
+            switch( escolhaSubPersonagem )
+            { 
+                case 1: MenuMudarDados(p); break;
+                /*
+                case 2: MenuArtefatosPersonagem; break;
+                */
+                case 3: Console.WriteLine(p); MenuSubPersonagem(p); break;
+                case 4: Sistema.PersonagemExcluir(p); break;
+            }
+        }
+        static public void MenuMudarDados(Personagem p)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{p.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Reset");
+            Console.WriteLine("[2] Mudar o Nome");
+            Console.WriteLine("[3] Mudar o ID");
+            Console.WriteLine("[4] Mudar o Level");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            int escolhaMudarDados = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaMudarDados < 0 || escolhaMudarDados > 4)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaMudarDados = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuMudarDados(p);
+            }
+            switch(escolhaMudarDados)
+            {
+                case 0: MenuSubPersonagem(p); break;
+                case 1: AtualizarPersonagem(p); MenuMudarDados(p); break;
+                case 2: NomePersonagem(p); MenuMudarDados(p); break;
+                case 3: IdPersonagem(p); MenuMudarDados(p); break;
+                case 4: LevelPersonagem(p); MenuMudarDados(p); break;
+            }
+        }
+        static public void MenuPersonagemArtefato(Personagem p)
+        {
+
         }
         static public void ArtfeatoListarNome()
         {
