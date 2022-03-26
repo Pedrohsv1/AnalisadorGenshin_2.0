@@ -15,7 +15,8 @@ namespace AnalyzerGenshin
                 {
                     case 1: CadastrarPersonagem() ;break;
                     case 2: CadastrarArtefato()   ;break;
-                    case 3: PersonagemListarNome();break;
+                    case 3: MenuPersonagem();break;
+                    case 4: ArtfeatoListarNome()  ;break;
 
                 }
 
@@ -70,7 +71,7 @@ namespace AnalyzerGenshin
             try
             {
                 string nome;
-                int level, id;
+                int level, id, idArtefato1, idArtefato2, idArtefato3, idArtefato4, idArtefato5;
 
                 Console.WriteLine("-=-= Cadastro do Personagem =-=-");
                 Console.WriteLine();
@@ -140,30 +141,15 @@ namespace AnalyzerGenshin
                 if (TipoC == 3) tipo = "Cryo";
                 if (TipoC == 4) tipo = "Electro";
                 if (TipoC == 5) tipo = "Geo";
-                if (TipoC == 6) tipo = "Anemo";
+                if (TipoC == 6) tipo = "Anemo";                
 
+                idArtefato1 = CadastrarArtefatoPersonagem("FLOR", 1);
+                idArtefato2 = CadastrarArtefatoPersonagem("PENA", 2);
+                idArtefato3 = CadastrarArtefatoPersonagem("RELOGIO", 3);
+                idArtefato4 = CadastrarArtefatoPersonagem("CÁLICE", 3);
+                idArtefato5 = CadastrarArtefatoPersonagem("TIARA", 3);
 
-                int i = 0;
-                foreach(Artefato art in Sistema.ArtefatoListar())
-                {
-                    if(art.GetTipo() == "FLOR")
-                    {
-                        Console.WriteLine($"Artefato [{i+1}]");
-                        Console.WriteLine(art);
-                        i++;
-                    }
-                }
-                if( i == 0 )
-                {
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Cadatre uma Flor no menu você");
-                    Console.WriteLine("não possui uma ainda!");
-                    Console.ResetColor();
-                    Console.WriteLine();
-                }
-
-                Personagem p = new Personagem(id, level, nome, tipo, 1, 2, 3, 4);
+                Personagem p = new Personagem(id, level, nome, tipo, idArtefato1, idArtefato2, idArtefato3, idArtefato4, idArtefato5);
                 Sistema.PersonagemInserir(p);
 
                 Console.WriteLine();
@@ -182,7 +168,7 @@ namespace AnalyzerGenshin
                 Console.WriteLine();
             }
         }
-        static public void CadastrarArtefato()
+        static public void CadastrarArtefato(string i = "Default" , int j = 0)
         {
             try
             {
@@ -200,81 +186,135 @@ namespace AnalyzerGenshin
 
                 nome = Console.ReadLine();
 
-                Console.WriteLine();
-                Console.Write("Tipo: ");
-                Console.WriteLine();
-                Console.WriteLine("[1] Flor");
-                Console.WriteLine("[2] Pena");
-                Console.WriteLine("[3] Relogio");
-                Console.WriteLine("[4] Cálice");
-                Console.WriteLine("[5] Tiara");
-                Console.WriteLine();
-                
-                int idTipo;
-                do
-                {
-                    Console.Write("Digite:");
-                    idTipo = int.Parse(Console.ReadLine());
-                }while (idTipo > 5 || idTipo < 0);
-
-                switch (idTipo)
-                {
-                    case 1: tipo = "FLOR"; mainStatus = "HP FLAT"; break;
-                    case 2: tipo = "PENA"; mainStatus = "ATQ FLAT"; break;
-                    case 3: tipo = "RELOGIO"; break;
-                    case 4: tipo = "CÁLICE" ; break;
-                    case 5: tipo = "TIARA"  ; break;
-                }
-                
-                Console.WriteLine(idTipo);
-                if (idTipo > 2)
+                if(i == "Default")
                 {
                     Console.WriteLine();
-                    Console.WriteLine("Main Status: ");
-                    Console.WriteLine("[1] HP%");
-                    Console.WriteLine("[2] ATQ%");
-                    Console.WriteLine("[3] DEF%");
-                    Console.WriteLine("[4] Crit RATE");
-                    Console.WriteLine("[5] Crit DMG");
-                    Console.WriteLine("[6] Elemental Mastery");
-                    Console.WriteLine("[7] Energy Recharge");
-                    Console.WriteLine("[8] Healing Bonus");
-                    Console.WriteLine("[9] Elemental DMG");
-                    Console.WriteLine("[10] Phisical DMG");
+                    Console.Write("Tipo: ");
+                    Console.WriteLine();
+                    Console.WriteLine("[1] Flor");
+                    Console.WriteLine("[2] Pena");
+                    Console.WriteLine("[3] Relogio");
+                    Console.WriteLine("[4] Cálice");
+                    Console.WriteLine("[5] Tiara");
                     Console.WriteLine();
                     
-                    int idMainStatus;
+                    int idTipo;
                     do
                     {
                         Console.Write("Digite:");
-                        idMainStatus = int.Parse(Console.ReadLine());
-                    }while (idMainStatus > 10 || idMainStatus < 0);
+                        idTipo = int.Parse(Console.ReadLine());
+                    }while (idTipo > 5 || idTipo < 0);
 
-                    switch (idMainStatus)
+                    switch (idTipo)
                     {
-                        case 1: mainStatus = "HP%"   ; break;
-                        case 2: mainStatus = "ATQ%"   ; break;
-                        case 3: mainStatus = "DEF%"; break;
-                        case 4: mainStatus = "CRIT RATE" ; break;
-                        case 5: mainStatus = "CRIT DMG"  ; break;
-                        case 6: mainStatus = "Elemental Mastery"   ; break;
-                        case 7: mainStatus = "Energy Recharge"   ; break;
-                        case 8: mainStatus = "Healing Bonus"; break;
-                        case 9: mainStatus = "Elemental DMG" ; break;
-                        case 10: mainStatus = "Phisical DMG"  ; break;
+                        case 1: tipo = "FLOR"; mainStatus = "HP FLAT"; break;
+                        case 2: tipo = "PENA"; mainStatus = "ATQ FLAT"; break;
+                        case 3: tipo = "RELOGIO"; break;
+                        case 4: tipo = "CÁLICE" ; break;
+                        case 5: tipo = "TIARA"  ; break;
+                    }
+                    if (idTipo > 2)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Main Status: ");
+                        Console.WriteLine("[1] HP%");
+                        Console.WriteLine("[2] ATQ%");
+                        Console.WriteLine("[3] DEF%");
+                        Console.WriteLine("[4] Crit RATE");
+                        Console.WriteLine("[5] Crit DMG");
+                        Console.WriteLine("[6] Elemental Mastery");
+                        Console.WriteLine("[7] Energy Recharge");
+                        Console.WriteLine("[8] Healing Bonus");
+                        Console.WriteLine("[9] Elemental DMG");
+                        Console.WriteLine("[10] Phisical DMG");
+                        Console.WriteLine();
+                    
+                        int idMainStatus;
+                        do
+                        {
+                            Console.Write("Digite:");
+                            idMainStatus = int.Parse(Console.ReadLine());
+                        }while (idMainStatus > 10 || idMainStatus < 0);
+
+                        switch (idMainStatus)
+                        {
+                            case 1: mainStatus = "HP%"   ; break;
+                            case 2: mainStatus = "ATQ%"   ; break;
+                            case 3: mainStatus = "DEF%"; break;
+                            case 4: mainStatus = "CRIT RATE" ; break;
+                            case 5: mainStatus = "CRIT DMG"  ; break;
+                            case 6: mainStatus = "Elemental Mastery"   ; break;
+                            case 7: mainStatus = "Energy Recharge"   ; break;
+                            case 8: mainStatus = "Healing Bonus"; break;
+                            case 9: mainStatus = "Elemental DMG" ; break;
+                            case 10: mainStatus = "Phisical DMG"  ; break;
+                        }
+                    }
+                    if ( idTipo == 1)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Flor é unicamente VIDA FLAT.");
+                        Console.WriteLine();
+                    }
+                    if ( idTipo == 2)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Pena é unicamente ATQ FLAT.");
+                        Console.WriteLine();
                     }
                 }
-                if ( idTipo == 1)
+                else
                 {
-                    Console.WriteLine();
-                    Console.WriteLine("Flor é unicamente VIDA FLAT.");
-                    Console.WriteLine();
-                }
-                if ( idTipo == 2)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine("Pena é unicamente ATQ FLAT.");
-                    Console.WriteLine();
+                    tipo = i;
+                    if (j == 3)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Main Status: ");
+                        Console.WriteLine("[1] HP%");
+                        Console.WriteLine("[2] ATQ%");
+                        Console.WriteLine("[3] DEF%");
+                        Console.WriteLine("[4] Crit RATE");
+                        Console.WriteLine("[5] Crit DMG");
+                        Console.WriteLine("[6] Elemental Mastery");
+                        Console.WriteLine("[7] Energy Recharge");
+                        Console.WriteLine("[8] Healing Bonus");
+                        Console.WriteLine("[9] Elemental DMG");
+                        Console.WriteLine("[10] Phisical DMG");
+                        Console.WriteLine();
+                    
+                        int idMainStatus;
+                        do
+                        {
+                            Console.Write("Digite:");
+                            idMainStatus = int.Parse(Console.ReadLine());
+                        }while (idMainStatus > 10 || idMainStatus < 0);
+
+                        switch (idMainStatus)
+                        {
+                            case 1: mainStatus = "HP%"   ; break;
+                            case 2: mainStatus = "ATQ%"   ; break;
+                            case 3: mainStatus = "DEF%"; break;
+                            case 4: mainStatus = "CRIT RATE" ; break;
+                            case 5: mainStatus = "CRIT DMG"  ; break;
+                            case 6: mainStatus = "Elemental Mastery"   ; break;
+                            case 7: mainStatus = "Energy Recharge"   ; break;
+                            case 8: mainStatus = "Healing Bonus"; break;
+                            case 9: mainStatus = "Elemental DMG" ; break;
+                            case 10: mainStatus = "Phisical DMG"  ; break;
+                        }
+                    }
+                    if ( j == 1)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Flor é unicamente VIDA FLAT.");
+                        Console.WriteLine();
+                    }
+                    if ( j == 2)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Pena é unicamente ATQ FLAT.");
+                        Console.WriteLine();
+                    }
                 }
 
                 status1 = Status(1);
@@ -287,19 +327,19 @@ namespace AnalyzerGenshin
                 valorMainStatus = double.Parse(Console.ReadLine());
 
                 Console.WriteLine();
-                Console.Write($"Valor Status 1 {status1}: ");
+                Console.Write($"Valor SubStatus 1 {status1}: ");
                 valorStatus1 = double.Parse(Console.ReadLine());
 
                 Console.WriteLine();
-                Console.Write($"Valor Status 2 {status2}: ");
+                Console.Write($"Valor SubStatus 2 {status2}: ");
                 valorStatus2 = double.Parse(Console.ReadLine());
 
                 Console.WriteLine();
-                Console.Write($"Valor Status 3 {status3}: ");
+                Console.Write($"Valor SubStatus 3 {status3}: ");
                 valorStatus3 = double.Parse(Console.ReadLine());
 
                 Console.WriteLine();
-                Console.Write($"Valor Status 4 {status4}: ");
+                Console.Write($"Valor SubStatus 4 {status4}: ");
                 valorStatus4 = double.Parse(Console.ReadLine());
 
                 Artefato a = new Artefato(id, nome, tipo, mainStatus, status1, status2, status3, status4, valorMainStatus, valorStatus1, valorStatus2, valorStatus3, valorStatus4);
@@ -360,13 +400,150 @@ namespace AnalyzerGenshin
                 }
             return tipo;
         }
-        static public void PersonagemListarNome()
+        static public void MenuPersonagem()
+        {         
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("===============================");
+            Console.ResetColor();
+            Console.WriteLine(" Menu               Personagem");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine("===============================");
+            Console.ResetColor();
+            Console.WriteLine();   
+            try
+            {
+                int i = 1;
+                foreach(Personagem p in Sistema.PersonagemListar())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"[{i}] {p.GetNome()}");
+                    i++;
+                }
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("[0] Voltar");
+                Console.ResetColor();
+                int escolhaPersonagem = -1;
+                
+                while(escolhaPersonagem == -1)
+                {
+                    i = 1;
+                    Console.WriteLine();
+                    Console.WriteLine("Digite:");
+                    escolhaPersonagem = int.Parse(Console.ReadLine());
+                    
+                    if(escolhaPersonagem == 0) break;
+                    foreach(Personagem p in Sistema.PersonagemListar())
+                    {
+                        if(i == escolhaPersonagem)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            Console.WriteLine("===============================");
+                            Console.ResetColor();
+                            MenuSubPersonagem(p);
+                        }
+                        else
+                        {
+                            escolhaPersonagem = -1;
+                        }
+                        i++;
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.WriteLine("===============================");
+                Console.ResetColor();
+            }
+            catch(Exception)
+            {
+                MenuPersonagem();
+            }
+            
+        }
+        static public void MenuSubPersonagem(Personagem p)
         {
-            foreach(Personagem p in Sistema.PersonagemListar())
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.Write($"{p.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Mudar Dados");
+            Console.WriteLine("[2] Artefatos");
+            Console.WriteLine("[3] Listar Personagens");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("[4] Excluir");
+            Console.WriteLine("[0] Sair");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void ArtfeatoListarNome()
+        {
+            foreach(Artefato a in Sistema.ArtefatoListar())
             {
                 Console.WriteLine();
-                Console.WriteLine(p);
+                Console.WriteLine(a);
             }
+        }
+        static public int CadastrarArtefatoPersonagem(string s, int r = 0)
+        {
+            int i = 0;
+            int Id;
+            foreach(Artefato a in Sistema.ArtefatoListar())
+            {
+                if(a.GetTipo() == s)
+                {
+                    Console.WriteLine(a);
+                    i++;
+                }
+            }
+            if( i == 0 )
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"Cadatre uma {s} no menu você");
+                Console.WriteLine("não possui uma ainda!");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine($"Deseja cadastar uma {s}? [s/n] ");
+                Console.Write("Digite:");
+                string j = Console.ReadLine();
+                while(j != "s" && j != "n")
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Tente digitar [s/n].");
+                    Console.ResetColor();
+                    Console.Write("Digite:");
+                    j = Console.ReadLine();
+                }
+                if(j == "s")
+                {
+                    CadastrarArtefato(s, r);
+                    int k = 0;
+                    foreach( Artefato a in Sistema.ArtefatoListar() )
+                    {
+                        if( a.GetTipo() == s )
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine(a);
+                            Console.WriteLine();
+                        }
+                    }
+                    Console.Write("Digite o ID do artefato: ");
+                    Id = int.Parse(Console.ReadLine());
+                    return Id;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                Console.Write("Digite o ID do artefato: ");
+                Id = int.Parse(Console.ReadLine());
+                return Id;
+                
+            }
+            
         }
     }
 }
