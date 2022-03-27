@@ -14,9 +14,9 @@ namespace AnalyzerGenshin
                 switch (run)
                 {
                     case 1: CadastrarPersonagem() ;break;
-                    case 2: CadastrarArtefato()   ;break;
-                    case 3: MenuPersonagem()      ;break;
-                    case 4: ArtfeatoListarNome()  ;break;
+                    case 3: CadastrarArtefato()   ;break;
+                    case 4: MenuPersonagem()      ;break;
+                    case 5: ArtfeatoListarNome()  ;break;
 
                 }
 
@@ -35,8 +35,10 @@ namespace AnalyzerGenshin
             Console.WriteLine();
             Console.WriteLine("[1] Cadastrar Personagem");
             Console.WriteLine("[2] Cadastrar Artefato");
-            Console.WriteLine("[3] Listar Personagens");
-            Console.WriteLine("[4] Listar Artefatos");
+            Console.WriteLine("[3] Cadastrar Talento");
+            Console.WriteLine("[4] Listar Personagens");
+            Console.WriteLine("[5] Listar Artefatos");
+            Console.WriteLine("[6] Listar Talentos");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("[0] Sair");
             Console.ResetColor();

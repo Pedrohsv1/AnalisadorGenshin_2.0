@@ -37,5 +37,17 @@ namespace AnalyzerGenshin
             a.Sort();
             return a;
         }
+        public static void TalentoInserir(Talento obj)
+        {
+            talentos.Add(obj);
+        }
+        public static void TalentoExcluir(Talento obj)
+        {
+            talentos.Remove(obj);
+        }
+        public static List<Talento> TalentoListar()
+        {
+            return talentos;
+        }
     }
 }
