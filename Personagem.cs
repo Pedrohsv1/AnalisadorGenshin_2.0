@@ -24,20 +24,40 @@ namespace AnalyzerGenshin
             this.idArtefato2 = idArtefato2;
             this.idArtefato3 = idArtefato3;
             this.idArtefato4 = idArtefato4;
-            this.idArtefato4 = idArtefato5;
+            this.idArtefato5 = idArtefato5;
         }
 
         public string GetNome()
         {
             return nome;
         }
+        public int GetId()
+        {
+            return id;
+        }
         public string GetTipo()
         {
             return tipo;
         }
-        public int GetId()
+        public int GetIdArtefato1()
         {
-            return id;
+            return idArtefato1;
+        }
+        public int GetIdArtefato2()
+        {
+            return idArtefato2;
+        }
+        public int GetIdArtefato3()
+        {
+            return idArtefato3;
+        }
+        public int GetIdArtefato4()
+        {
+            return idArtefato4;
+        }
+        public int GetIdArtefato5()
+        {
+            return idArtefato5;
         }
         public int GetLevel()
         {
@@ -58,6 +78,26 @@ namespace AnalyzerGenshin
         public void SetLevel(int level)
         {
             this.level = level;
+        }
+        public void SetIdArtefato1(int ID)
+        {
+            this.idArtefato1 = ID;
+        }
+        public void SetIdArtefato2(int ID)
+        {
+            this.idArtefato2 = ID;
+        }
+        public void SetIdArtefato3(int ID)
+        {
+            this.idArtefato3 = ID;
+        }
+        public void SetIdArtefato4(int ID)
+        {
+            this.idArtefato4 = ID;
+        }
+        public void SetIdArtefato5(int ID)
+        {
+            this.idArtefato5 = ID;
         }
         public int CompareTo(Personagem Obj)
         {

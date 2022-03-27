@@ -34,6 +34,14 @@ namespace AnalyzerGenshin
             this.valorStatus3 = valorStatus3;
             this.valorStatus4 = valorStatus4;
         }
+        public void SetIdPersonagem(int idPersonagem)
+        {
+            this.idPersonagem = idPersonagem;
+        }
+        public Artefato(string tipo)
+        {
+            this.tipo = tipo;
+        }
         public override string ToString()
         {
             return $"\n Id - {id}\n\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus:0.0}\n\n {status1} - {valorStatus1:0.0}\n {status2} - {valorStatus2:0.0}\n {status3} - {valorStatus3:0.0}\n {status4} - {valorStatus4:0.0}";

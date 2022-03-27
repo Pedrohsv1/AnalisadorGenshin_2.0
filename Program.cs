@@ -143,11 +143,11 @@ namespace AnalyzerGenshin
                 if (TipoC == 5) tipo = "Geo";
                 if (TipoC == 6) tipo = "Anemo";                
 
-                idArtefato1 = CadastrarArtefatoPersonagem("FLOR", 1);
-                idArtefato2 = CadastrarArtefatoPersonagem("PENA", 2);
-                idArtefato3 = CadastrarArtefatoPersonagem("RELOGIO", 3);
-                idArtefato4 = CadastrarArtefatoPersonagem("CÁLICE", 3);
-                idArtefato5 = CadastrarArtefatoPersonagem("TIARA", 3);
+                idArtefato1 = CadastrarArtefatoPersonagem( "FLOR", 1);
+                idArtefato2 = CadastrarArtefatoPersonagem( "PENA", 2);
+                idArtefato3 = CadastrarArtefatoPersonagem( "RELOGIO", 3);
+                idArtefato4 = CadastrarArtefatoPersonagem( "CÁLICE", 3);
+                idArtefato5 = CadastrarArtefatoPersonagem( "TIARA", 3);
 
                 Personagem p = new Personagem(id, level, nome, tipo, idArtefato1, idArtefato2, idArtefato3, idArtefato4, idArtefato5);
                 Sistema.PersonagemInserir(p);
@@ -168,7 +168,7 @@ namespace AnalyzerGenshin
                 Console.WriteLine();
             }
         }
-        static public void CadastrarArtefato(string i = "Default" , int j = 0)
+        static public void CadastrarArtefato( string i = "Default" , int j = 0)
         {
             try
             {
@@ -307,13 +307,11 @@ namespace AnalyzerGenshin
                     {
                         Console.WriteLine();
                         Console.WriteLine("Flor é unicamente VIDA FLAT.");
-                        Console.WriteLine();
                     }
                     if ( j == 2)
                     {
                         Console.WriteLine();
                         Console.WriteLine("Pena é unicamente ATQ FLAT.");
-                        Console.WriteLine();
                     }
                 }
 
@@ -322,11 +320,11 @@ namespace AnalyzerGenshin
                 status3 = Status(3);
                 status4 = Status(4);
 
-                Console.WriteLine();
+
                 Console.Write($"Valor Main Status {mainStatus}: ");
                 valorMainStatus = double.Parse(Console.ReadLine());
-
                 Console.WriteLine();
+
                 Console.Write($"Valor SubStatus 1 {status1}: ");
                 valorStatus1 = double.Parse(Console.ReadLine());
 
@@ -610,7 +608,7 @@ namespace AnalyzerGenshin
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{p.GetNome()}");
             Console.ResetColor();
-            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine($" - TIPO : {p.GetTipo()} - ID : {p.GetId()}");
             Console.WriteLine();
             Console.WriteLine("[1] Mudar Dados");
             Console.WriteLine("[2] Artefatos");
@@ -654,7 +652,7 @@ namespace AnalyzerGenshin
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{p.GetNome()}");
             Console.ResetColor();
-            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine($" - TIPO : {p.GetTipo()} - ID : {p.GetId()}");
             Console.WriteLine();
             Console.WriteLine("[1] Reset");
             Console.WriteLine("[2] Mudar o Nome");
@@ -694,7 +692,7 @@ namespace AnalyzerGenshin
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{p.GetNome()}");
             Console.ResetColor();
-            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine($" - TIPO : {p.GetTipo()} - ID : {p.GetId()}");
             Console.WriteLine();
             Console.WriteLine("[1] Mostrar tudo");
             Console.WriteLine("[2] Pena");
@@ -724,21 +722,21 @@ namespace AnalyzerGenshin
             switch(escolhaPersonagemArtefato)
             {
                 case 0: MenuSubPersonagem(p); break;
-                case 1: ArtfeatoListarNome(); break;
-                case 2:  MenuSubPersonagemArtefato(p, "PENA"); break;
-                case 3:  MenuSubPersonagemArtefato(p, "FLOR"); break;
-                case 4:  MenuSubPersonagemArtefato(p, "RELOGIO"); break;
-                case 5:  MenuSubPersonagemArtefato(p, "CÁLICE"); break;
-                case 6:  MenuSubPersonagemArtefato(p, "TIARA"); break;
+                case 1: ArtfeatosListarPersonagem(p); MenuPersonagemArtefato(p); break;
+                case 2:  MenuSubPersonagemArtefato( p, "PENA"); break;
+                case 3:  MenuSubPersonagemArtefato( p, "FLOR"); break;
+                case 4:  MenuSubPersonagemArtefato( p, "RELOGIO"); break;
+                case 5:  MenuSubPersonagemArtefato( p, "CÁLICE"); break;
+                case 6:  MenuSubPersonagemArtefato( p, "TIARA"); break;
             }
         }
-        static public void MenuSubPersonagemArtefato(Artefato a)
+        static public void MenuSubPersonagemArtefato(Personagem p, string s)
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write($"{p.GetNome()}");
             Console.ResetColor();
-            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine($" - TIPO : {p.GetTipo()} - ID : {p.GetId()}");
             Console.WriteLine();
             Console.WriteLine($"{s}");
             Console.WriteLine();
@@ -749,17 +747,97 @@ namespace AnalyzerGenshin
             Console.ResetColor();
             Console.WriteLine();
             Console.WriteLine("Digite:");
+            int escolhaPersonagemArtefato = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaPersonagemArtefato < 0 || escolhaPersonagemArtefato > 2)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaPersonagemArtefato = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuSubPersonagemArtefato(p, s);
+            }
+            int x = 1;
+            int id = -1;
+            if(s == "FLOR")
+            {
+                id = p.GetIdArtefato1();
+            }
+            else
+            {
+                if(s == "PENA")
+                {
+                    x = 2;
+                    id = p.GetIdArtefato2();
+                }
+                else
+                {
+                    if(s == "RELOGIO")
+                    {
+                        x = 3;
+                        id = p.GetIdArtefato3();
+                    }
+                    else
+                    {
+                        if(s == "CÁLICE")
+                        {
+                            x = 3;
+                            id = p.GetIdArtefato4();
+                        }
+                        else
+                        {
+                            if(s == "TIARA")
+                            {
+                                x = 3;
+                                id = p.GetIdArtefato5();
+                            }
+                        }
+                    }
+                }
+            }
+            
+            switch(escolhaPersonagemArtefato)
+            {
+                case 0: MenuPersonagemArtefato(p); break;
+                case 1: Console.WriteLine(BuscarArtefato(id)); MenuSubPersonagemArtefato(p, s); break;
+                case 2: TrocarArtefatoPersonagem(p, s, x); MenuSubPersonagemArtefato(p, s); break;
+            }
         }
         static public void ArtfeatoListarNome()
         {
             foreach(Artefato a in Sistema.ArtefatoListar())
             {
-                Console.WriteLine();
                 Console.WriteLine(a);
+                Console.WriteLine();
             }
         }
+        static public void ArtfeatosListarPersonagem(Personagem p)
+        {
+            int[] IDs = new int[5];
 
-        static public int CadastrarArtefatoPersonagem(string s, int r = 0)
+            IDs[0] = p.GetIdArtefato1();
+            IDs[1] = p.GetIdArtefato2();
+            IDs[2] = p.GetIdArtefato3();
+            IDs[3] = p.GetIdArtefato4();
+            IDs[4] = p.GetIdArtefato5();
+
+            foreach(int i in IDs)
+            {
+                foreach(Artefato a in Sistema.ArtefatoListar())
+                {
+                    if(a.GetId() == i)
+                    {
+                        Console.WriteLine(a);
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+        static public int CadastrarArtefatoPersonagem( string s, int r)
         {
             int i = 0;
             int Id;
@@ -793,7 +871,6 @@ namespace AnalyzerGenshin
                 if(j == "s")
                 {
                     CadastrarArtefato(s, r);
-                    int k = 0;
                     foreach( Artefato a in Sistema.ArtefatoListar() )
                     {
                         if( a.GetTipo() == s )
@@ -820,6 +897,93 @@ namespace AnalyzerGenshin
                 
             }
             
+        }
+        static public void TrocarArtefatoPersonagem(Personagem p, string s, int r)
+        {
+            int i = 0;
+            int Id;
+            foreach(Artefato a in Sistema.ArtefatoListar())
+            {
+                if(a.GetTipo() == s)
+                {
+                    Console.WriteLine(a);
+                    i++;
+                }
+            }
+            if( i == 0 )
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine($"Cadatre uma {s} no menu você");
+                Console.WriteLine("não possui uma ainda!");
+                Console.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine($"Deseja cadastar uma {s}? [s/n] ");
+                Console.Write("Digite:");
+                string j = Console.ReadLine();
+                while(j != "s" && j != "n")
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Tente digitar [s/n].");
+                    Console.ResetColor();
+                    Console.Write("Digite:");
+                    j = Console.ReadLine();
+                }
+                Console.WriteLine();
+                if(j == "s")
+                {
+                    CadastrarArtefato( s, r);
+                    foreach( Artefato a in Sistema.ArtefatoListar() )
+                    {
+                        if( a.GetTipo() == s )
+                        {
+                            Console.WriteLine(a);
+                            Console.WriteLine();
+                        }
+                    }
+                    Console.Write("Digite o ID do artefato: ");
+                    Id = int.Parse(Console.ReadLine());
+                    switch(s)
+                    {
+                        case "FLOR": p.SetIdArtefato1(Id); break;
+                        case "PENA": p.SetIdArtefato2(Id); break;
+                        case "RELOGIO": p.SetIdArtefato3(Id); break;
+                        case "CÁLICE": p.SetIdArtefato4(Id); break;
+                        case "TIARA": p.SetIdArtefato5(Id); break;
+                    }
+                }
+                else
+                {
+                    MenuSubPersonagemArtefato(p, s);
+                }
+            }
+            else
+            {
+                Console.Write("Digite o ID do artefato: ");
+                Id = int.Parse(Console.ReadLine());
+                switch(s)
+                {
+                    case "FLOR": p.SetIdArtefato1(Id); break;
+                    case "PENA": p.SetIdArtefato2(Id); break;
+                    case "RELOGIO": p.SetIdArtefato3(Id); break;
+                    case "CÁLICE": p.SetIdArtefato4(Id); break;
+                    case "TIARA": p.SetIdArtefato5(Id); break;
+                }
+                
+            }
+            
+        }
+        static public Artefato BuscarArtefato(int Id)
+        {
+            foreach(Artefato a in Sistema.ArtefatoListar())
+            {
+                if(Id == a.GetId())
+                {
+                    return a;
+                }
+            }
+            Artefato Art = new Artefato("None");
+            return Art;
         }
     }
 }
