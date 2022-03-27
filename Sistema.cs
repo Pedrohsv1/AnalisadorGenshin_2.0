@@ -37,5 +37,9 @@ namespace AnalyzerGenshin
             a.Sort();
             return a;
         }
+        static public Artefato BuscarArtefato(int Id)
+        {
+            
+        }
     }
 }

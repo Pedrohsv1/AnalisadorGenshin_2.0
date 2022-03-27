@@ -621,6 +621,7 @@ namespace AnalyzerGenshin
             Console.WriteLine("[0] Voltar");
             Console.ResetColor();
             Console.WriteLine();
+            Console.WriteLine("Digite:");
             int escolhaSubPersonagem = int.Parse(Console.ReadLine());
             try
             {
@@ -637,14 +638,12 @@ namespace AnalyzerGenshin
             }
             if(escolhaSubPersonagem == 0)
             {
-                MenuPersonagem(p);
+                MenuPersonagem();
             }
             switch( escolhaSubPersonagem )
             { 
                 case 1: MenuMudarDados(p); break;
-                /*
-                case 2: MenuArtefatosPersonagem; break;
-                */
+                case 2: MenuPersonagemArtefato(p); break;
                 case 3: Console.WriteLine(p); MenuSubPersonagem(p); break;
                 case 4: Sistema.PersonagemExcluir(p); break;
             }
@@ -665,6 +664,7 @@ namespace AnalyzerGenshin
             Console.WriteLine("[0] Voltar");
             Console.ResetColor();
             Console.WriteLine();
+            Console.WriteLine("Digite:");
             int escolhaMudarDados = int.Parse(Console.ReadLine());
             try
             {
@@ -690,7 +690,65 @@ namespace AnalyzerGenshin
         }
         static public void MenuPersonagemArtefato(Personagem p)
         {
-
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{p.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Mostrar tudo");
+            Console.WriteLine("[2] Pena");
+            Console.WriteLine("[3] Flor");
+            Console.WriteLine("[4] Relogio");
+            Console.WriteLine("[5] Cálice");
+            Console.WriteLine("[6] Tiara");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Digite:");
+            int escolhaPersonagemArtefato = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaPersonagemArtefato < 0 || escolhaPersonagemArtefato > 6)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaPersonagemArtefato = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuMudarDados(p);
+            }
+            switch(escolhaPersonagemArtefato)
+            {
+                case 0: MenuSubPersonagem(p); break;
+                case 1: ArtfeatoListarNome(); break;
+                case 2:  MenuSubPersonagemArtefato(p, "PENA"); break;
+                case 3:  MenuSubPersonagemArtefato(p, "FLOR"); break;
+                case 4:  MenuSubPersonagemArtefato(p, "RELOGIO"); break;
+                case 5:  MenuSubPersonagemArtefato(p, "CÁLICE"); break;
+                case 6:  MenuSubPersonagemArtefato(p, "TIARA"); break;
+            }
+        }
+        static public void MenuSubPersonagemArtefato(Artefato a)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{p.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" - {p.GetTipo()}");
+            Console.WriteLine();
+            Console.WriteLine($"{s}");
+            Console.WriteLine();
+            Console.WriteLine($"[1] Mostrar");
+            Console.WriteLine("[2] Trocar");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Digite:");
         }
         static public void ArtfeatoListarNome()
         {
@@ -700,6 +758,7 @@ namespace AnalyzerGenshin
                 Console.WriteLine(a);
             }
         }
+
         static public int CadastrarArtefatoPersonagem(string s, int r = 0)
         {
             int i = 0;
