@@ -44,7 +44,7 @@ namespace AnalyzerGenshin
         }
         public override string ToString()
         {
-            return $"\n Id - {id}\n\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus:0.0}\n\n {status1} - {valorStatus1:0.0}\n {status2} - {valorStatus2:0.0}\n {status3} - {valorStatus3:0.0}\n {status4} - {valorStatus4:0.0}";
+            return $"\n Id - {id}\n\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus}\n\n {status1} - {valorStatus1}\n {status2} - {valorStatus2}\n {status3} - {valorStatus3}\n {status4} - {valorStatus4}";
         }
         public string GetTipo()
         {
@@ -62,5 +62,58 @@ namespace AnalyzerGenshin
         {
             return GetNome().CompareTo(Obj.GetNome());
         }
+        public void SetId(int id)
+        {
+            this.id = id;
+        }
+        public void SetNome(string nome)
+        {
+            this.nome = nome;
+        }
+        public void SetTipo(string nome)
+        {
+            this.nome = nome;
+        }
+        public void SetMainStatus(string mainStatus)
+        {
+            this.mainStatus = mainStatus;
+        }
+        public void SetStatus1(string status1)
+        {
+            this.status1 = status1;
+        }
+        public void SetStatus2(string status2)
+        {
+            this.status2 = status2;
+        }
+        public void SetStatus3(string status3)
+        {
+            this.status3 = status3;
+        }
+        public void SetStatus4(string status4)
+        {
+            this.status4 = status4;
+        }
+        public void SetValorMainStatus(double valorMainStatus)
+        {
+            this.valorMainStatus = valorMainStatus;
+        }
+        public void SetValorStatus1(double valorStatus1)
+        {
+            this.valorStatus1 = valorStatus1;
+        }
+        public void SetValorStatus2(double valorStatus2)
+        {
+            this.valorStatus2 = valorStatus2;
+        }
+        public void SetValorStatus3(double valorStatus3)
+        {
+            this.valorStatus3 = valorStatus3;
+        }
+        public void SetValorStatus4(double valorStatus4)
+        {
+            this.valorStatus4 = valorStatus4;
+        }
+
     }
 }

@@ -16,7 +16,19 @@ namespace AnalyzerGenshin
         }
         public override string ToString()
         {
-            return $"\n Id - {id}\n\n {level} | {nome}\n";
+            return $"\n Id - {id}\n Level : {level} | Nome : {nome}\n";
+        }
+        public int GetId()
+        {
+            return id;
+        }
+        public string GetNome()
+        {
+            return nome;
+        }
+        public int GetLevel()
+        {
+            return level;
         }
     }
 }

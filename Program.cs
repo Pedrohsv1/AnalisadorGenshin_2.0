@@ -14,9 +14,11 @@ namespace AnalyzerGenshin
                 switch (run)
                 {
                     case 1: CadastrarPersonagem() ;break;
-                    case 3: CadastrarArtefato()   ;break;
-                    case 4: MenuPersonagem()      ;break;
-                    case 5: ArtfeatoListarNome()  ;break;
+                    case 2: CadastrarArtefato()   ;break;
+                    case 3: CadastrarTalento() ;break;
+                    case 4: MenuPersonagem() ;break;
+                    case 5: MenuArtefatos() ;break;
+                    case 6: MenuTalento() ;break;
 
                 }
 
@@ -36,9 +38,9 @@ namespace AnalyzerGenshin
             Console.WriteLine("[1] Cadastrar Personagem");
             Console.WriteLine("[2] Cadastrar Artefato");
             Console.WriteLine("[3] Cadastrar Talento");
-            Console.WriteLine("[4] Listar Personagens");
-            Console.WriteLine("[5] Listar Artefatos");
-            Console.WriteLine("[6] Listar Talentos");
+            Console.WriteLine("[4] Menu Personagem");
+            Console.WriteLine("[5] Menu Artefatos");
+            Console.WriteLine("[6] Menu Talentos");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("[0] Sair");
             Console.ResetColor();
@@ -360,6 +362,278 @@ namespace AnalyzerGenshin
                 Console.WriteLine();
             }
         }
+        static public void AtualizarArtefato( Artefato a, string i = "Default" , int j = 0)
+        {
+            try
+            {
+                string nome, tipo = "Default", mainStatus = "Default", status1, status2, status3, status4;
+                int id;
+                double valorMainStatus, valorStatus1, valorStatus2, valorStatus3, valorStatus4;
+
+                Console.WriteLine("=-=-= Cadastro do Artefato =-=-=");
+                Console.WriteLine();
+                Console.Write("Id: ");
+                id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write("Nome: ");
+
+                nome = Console.ReadLine();
+
+                if(i == "Default")
+                {
+                    Console.WriteLine();
+                    Console.Write("Tipo: ");
+                    Console.WriteLine();
+                    Console.WriteLine("[1] Flor");
+                    Console.WriteLine("[2] Pena");
+                    Console.WriteLine("[3] Relogio");
+                    Console.WriteLine("[4] Cálice");
+                    Console.WriteLine("[5] Tiara");
+                    Console.WriteLine();
+                    
+                    int idTipo;
+                    do
+                    {
+                        Console.Write("Digite:");
+                        idTipo = int.Parse(Console.ReadLine());
+                    }while (idTipo > 5 || idTipo < 0);
+
+                    switch (idTipo)
+                    {
+                        case 1: tipo = "FLOR"; mainStatus = "HP FLAT"; break;
+                        case 2: tipo = "PENA"; mainStatus = "ATQ FLAT"; break;
+                        case 3: tipo = "RELOGIO"; break;
+                        case 4: tipo = "CÁLICE" ; break;
+                        case 5: tipo = "TIARA"  ; break;
+                    }
+                    if (idTipo > 2)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Main Status: ");
+                        Console.WriteLine("[1] HP%");
+                        Console.WriteLine("[2] ATQ%");
+                        Console.WriteLine("[3] DEF%");
+                        Console.WriteLine("[4] Crit RATE");
+                        Console.WriteLine("[5] Crit DMG");
+                        Console.WriteLine("[6] Elemental Mastery");
+                        Console.WriteLine("[7] Energy Recharge");
+                        Console.WriteLine("[8] Healing Bonus");
+                        Console.WriteLine("[9] Elemental DMG");
+                        Console.WriteLine("[10] Phisical DMG");
+                        Console.WriteLine();
+                    
+                        int idMainStatus;
+                        do
+                        {
+                            Console.Write("Digite:");
+                            idMainStatus = int.Parse(Console.ReadLine());
+                        }while (idMainStatus > 10 || idMainStatus < 0);
+
+                        switch (idMainStatus)
+                        {
+                            case 1: mainStatus = "HP%"   ; break;
+                            case 2: mainStatus = "ATQ%"   ; break;
+                            case 3: mainStatus = "DEF%"; break;
+                            case 4: mainStatus = "CRIT RATE" ; break;
+                            case 5: mainStatus = "CRIT DMG"  ; break;
+                            case 6: mainStatus = "Elemental Mastery"   ; break;
+                            case 7: mainStatus = "Energy Recharge"   ; break;
+                            case 8: mainStatus = "Healing Bonus"; break;
+                            case 9: mainStatus = "Elemental DMG" ; break;
+                            case 10: mainStatus = "Phisical DMG"  ; break;
+                        }
+                    }
+                    if ( idTipo == 1)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Flor é unicamente VIDA FLAT.");
+                        Console.WriteLine();
+                    }
+                    if ( idTipo == 2)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Pena é unicamente ATQ FLAT.");
+                        Console.WriteLine();
+                    }
+                }
+                else
+                {
+                    tipo = i;
+                    if (j == 3)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Main Status: ");
+                        Console.WriteLine("[1] HP%");
+                        Console.WriteLine("[2] ATQ%");
+                        Console.WriteLine("[3] DEF%");
+                        Console.WriteLine("[4] Crit RATE");
+                        Console.WriteLine("[5] Crit DMG");
+                        Console.WriteLine("[6] Elemental Mastery");
+                        Console.WriteLine("[7] Energy Recharge");
+                        Console.WriteLine("[8] Healing Bonus");
+                        Console.WriteLine("[9] Elemental DMG");
+                        Console.WriteLine("[10] Phisical DMG");
+                        Console.WriteLine();
+                    
+                        int idMainStatus;
+                        do
+                        {
+                            Console.Write("Digite:");
+                            idMainStatus = int.Parse(Console.ReadLine());
+                        }while (idMainStatus > 10 || idMainStatus < 0);
+
+                        switch (idMainStatus)
+                        {
+                            case 1: mainStatus = "HP%"   ; break;
+                            case 2: mainStatus = "ATQ%"   ; break;
+                            case 3: mainStatus = "DEF%"; break;
+                            case 4: mainStatus = "CRIT RATE" ; break;
+                            case 5: mainStatus = "CRIT DMG"  ; break;
+                            case 6: mainStatus = "Elemental Mastery"   ; break;
+                            case 7: mainStatus = "Energy Recharge"   ; break;
+                            case 8: mainStatus = "Healing Bonus"; break;
+                            case 9: mainStatus = "Elemental DMG" ; break;
+                            case 10: mainStatus = "Phisical DMG"  ; break;
+                        }
+                    }
+                    if ( j == 1)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Flor é unicamente VIDA FLAT.");
+                    }
+                    if ( j == 2)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("Pena é unicamente ATQ FLAT.");
+                    }
+                }
+
+                status1 = Status(1);
+                status2 = Status(2);
+                status3 = Status(3);
+                status4 = Status(4);
+
+
+                Console.Write($"Valor Main Status {mainStatus}: ");
+                valorMainStatus = double.Parse(Console.ReadLine());
+                Console.WriteLine();
+
+                Console.Write($"Valor SubStatus 1 {status1}: ");
+                valorStatus1 = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor SubStatus 2 {status2}: ");
+                valorStatus2 = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor SubStatus 3 {status3}: ");
+                valorStatus3 = double.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write($"Valor SubStatus 4 {status4}: ");
+                valorStatus4 = double.Parse(Console.ReadLine());
+
+                a.SetId(id);
+                a.SetNome(nome);
+                a.SetMainStatus(mainStatus);
+                a.SetStatus1(status1);
+                a.SetStatus2(status2);
+                a.SetStatus3(status3);
+                a.SetStatus4(status4);
+                a.SetValorMainStatus(valorMainStatus);
+                a.SetValorStatus1(valorStatus1);
+                a.SetValorStatus2(valorStatus2);
+                a.SetValorStatus3(valorStatus3);
+                a.SetValorStatus4(valorStatus4);
+
+
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Artefato Atualizado!");
+                Console.ResetColor();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Erro, Tente denovo.");
+                Console.ResetColor();
+                Console.WriteLine();
+            }
+        }
+        static public void CadastrarTalento()
+        {
+            try
+            {
+                int id, level, idPerso;
+                string nome;
+                Console.WriteLine("=-=-= Cadastro do Talento =-=-=");
+                Console.WriteLine();
+                Console.Write("Id: ");
+                id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write("Nome: ");
+
+                nome = Console.ReadLine();
+
+                Console.WriteLine();
+                Console.Write("Level [1-9]: ");
+
+                level = int.Parse(Console.ReadLine());
+                while(level < 1 || level > 9)
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Digite um número entre 1 e 9");
+                    Console.ResetColor();
+                    Console.Write("Level [1-9]: ");
+                    level = int.Parse(Console.ReadLine());
+                }
+
+                Console.WriteLine();
+                int contador = 0;
+                foreach(Personagem p in Sistema.PersonagemListar())
+                {
+                    Console.WriteLine($"Nome : {p.GetNome()} - ID : {p.GetId()}");
+                    contador++;
+                }
+                if(contador == 0)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Ainda não tem Personagem cadastrado");
+                    Console.ResetColor();
+
+                }
+                Console.WriteLine();
+                Console.Write("Id do Personagem: ");
+                idPerso = int.Parse(Console.ReadLine());
+
+                Talento aux = new Talento(id, idPerso, nome, level);
+
+                Sistema.TalentoInserir(aux);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Talento Cadastrado!");
+                Console.ResetColor();
+                Console.WriteLine();
+            }
+            catch(Exception)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Erro, Tente denovo.");
+                Console.ResetColor();
+                Console.WriteLine();
+                CadastrarTalento();
+            }
+            
+
+        }
         static public void AtualizarPersonagem(Personagem p)
         {
             string tipo = "Default", nome = "Default";
@@ -467,6 +741,25 @@ namespace AnalyzerGenshin
             Console.ResetColor();
             Console.WriteLine();
         }
+        static public void NomeArtefato(Artefato a)
+        {
+            Console.WriteLine("-=-= Artefato Nome =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                string nome =Console.ReadLine();
+                a.SetNome(nome);
+            }
+            catch(Exception)
+            {
+                NomeArtefato(a);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Nome Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
         static public void LevelPersonagem(Personagem p)
         {
             Console.WriteLine("-=-= Personagem Level =-=-");
@@ -498,6 +791,25 @@ namespace AnalyzerGenshin
             catch(Exception)
             {
                 IdPersonagem(p);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Level Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void IdArtefato(Artefato a)
+        {
+            Console.WriteLine("-=-= Artefato Id =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                int id = int.Parse(Console.ReadLine());
+                a.SetId(id);
+            }
+            catch(Exception)
+            {
+                IdArtefato(a);
             }
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -688,6 +1000,82 @@ namespace AnalyzerGenshin
                 case 4: LevelPersonagem(p); MenuMudarDados(p); break;
             }
         }
+        static public void MenuMudarArtefato(Artefato a)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{a.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" | {a.GetTipo()} - ID : {a.GetId()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Reset");
+            Console.WriteLine("[2] Mudar o Nome");
+            Console.WriteLine("[3] Mudar o ID");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Digite:");
+            int escolhaMudarDados = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaMudarDados < 0 || escolhaMudarDados > 3)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaMudarDados = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuMudarArtefato(a);
+            }
+            switch(escolhaMudarDados)
+            {
+                case 1: AtualizarArtefato(a); MenuMudarArtefato(a); break;
+                case 2: NomeArtefato(a); MenuMudarArtefato(a); break;
+                case 3: IdArtefato(a); MenuMudarArtefato(a); break;
+                case 0: MenuSubArtefato(a); break;
+            }
+        }
+        static public void MenuMudarTalento(Artefato a)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{a.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" | {a.GetTipo()} - ID : {a.GetId()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Reset");
+            Console.WriteLine("[2] Mudar o Nome");
+            Console.WriteLine("[3] Mudar o ID");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Digite:");
+            int escolhaMudarDados = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaMudarDados < 0 || escolhaMudarDados > 3)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaMudarDados = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuMudarArtefato(a);
+            }
+            switch(escolhaMudarDados)
+            {
+                case 1: AtualizarArtefato(a); MenuMudarArtefato(a); break;
+                case 2: NomeArtefato(a); MenuMudarArtefato(a); break;
+                case 3: IdArtefato(a); MenuMudarArtefato(a); break;
+                case 0: MenuSubArtefato(a); break;
+            }
+        }
         static public void MenuPersonagemArtefato(Personagem p)
         {
             Console.WriteLine();
@@ -807,6 +1195,199 @@ namespace AnalyzerGenshin
                 case 0: MenuPersonagemArtefato(p); break;
                 case 1: Console.WriteLine(BuscarArtefato(id)); MenuSubPersonagemArtefato(p, s); break;
                 case 2: TrocarArtefatoPersonagem(p, s, x); MenuSubPersonagemArtefato(p, s); break;
+            }
+        }
+        static public void MenuArtefatos()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("===============================");
+            Console.ResetColor();
+            Console.WriteLine(" Menu                 Artefato");
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("===============================");
+            Console.ResetColor();
+            Console.WriteLine();   
+            try
+            {
+                int i = 1;
+                foreach(Artefato a in Sistema.ArtefatoListar())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"[{i}] Nome : {a.GetNome()} - TIPO : {a.GetTipo()} - ID : {a.GetId()}");
+                    i++;
+                }
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("[0] Voltar");
+                Console.ResetColor();
+                int escolhaArtefato = -1;
+                
+                while(escolhaArtefato == -1)
+                {
+                    i = 1;
+                    Console.WriteLine();
+                    Console.WriteLine("Digite:");
+                    escolhaArtefato = int.Parse(Console.ReadLine());
+                    
+                    if(escolhaArtefato == 0) break;
+                    foreach(Artefato a in Sistema.ArtefatoListar())
+                    {
+                        if(i == escolhaArtefato)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.WriteLine("===============================");
+                            Console.ResetColor();
+                            MenuSubArtefato(a);
+                        }
+                        else
+                        {
+                            escolhaArtefato = -1;
+                        }
+                        i++;
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("===============================");
+                Console.ResetColor();
+            }
+            catch(Exception)
+            {
+                MenuArtefatos();
+            }
+        }
+        static public void MenuSubArtefato(Artefato a)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{a.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" | {a.GetTipo()} - ID : {a.GetId()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Mudar Dados");
+            Console.WriteLine("[2] Listar Dados");
+            Console.Write("[3] ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("Excluir");
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Digite:");
+            int escolhaSubArtefato = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaSubArtefato < 0 || escolhaSubArtefato > 3)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaSubArtefato = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuSubArtefato(a);
+            }
+            if(escolhaSubArtefato == 0)
+            {
+                MenuArtefatos();
+            }
+            switch( escolhaSubArtefato )
+            { 
+                case 1: MenuMudarArtefato(a); break;
+                case 2: Console.WriteLine(a); MenuSubArtefato(a); break;
+                case 3: Sistema.ArtefatoExcluir(a); break;
+            }
+        }
+        static public void MenuSubTalento(Talento t)
+        {
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"{t.GetNome()}");
+            Console.ResetColor();
+            Console.WriteLine($" | {t.GetLevel()} - ID : {t.GetId()}");
+            Console.WriteLine();
+            Console.WriteLine("[1] Mudar Dados");
+            Console.WriteLine("[2] Listar Dados");
+            Console.Write("[3] ");
+            Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine("Excluir");
+            Console.WriteLine("[0] Voltar");
+            Console.ResetColor();
+            Console.WriteLine();
+            Console.WriteLine("Digite:");
+            int escolhaSubArtefato = int.Parse(Console.ReadLine());
+            try
+            {
+                while(escolhaSubArtefato < 0 || escolhaSubArtefato > 3)
+                {
+                    Console.WriteLine("Erro tente novamente, Digite:");
+                    escolhaSubArtefato = int.Parse(Console.ReadLine());
+                }
+                
+            }
+            catch(Exception)
+            {
+                MenuSubTalento(t);
+            }
+            if(escolhaSubArtefato == 0)
+            {
+                MenuTalento();
+            }
+            switch( escolhaSubArtefato )
+            { 
+                case 2: Console.WriteLine(t); MenuSubTalento(t); break;
+                case 3: Sistema.TalentoExcluir(t); break;
+            }
+        }
+        static public void MenuTalento()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("===============================");
+            Console.ResetColor();
+            Console.WriteLine(" Menu                  Talento");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("===============================");
+            Console.ResetColor();
+            Console.WriteLine();   
+            try
+            {
+                int i = 1;
+                foreach(Talento t in Sistema.TalentoListar())
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"[ ID : {t.GetId()} ] - Nome : {t.GetNome()}");
+                    i++;
+                }
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("[0] Voltar");
+                Console.ResetColor();
+                int escolhaTalento = -1;
+                int k = 0;
+
+                while(k == 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Digite:");
+                    escolhaTalento = int.Parse(Console.ReadLine());
+                    
+                    if(escolhaTalento == 0) break;
+                    foreach(Talento t in Sistema.TalentoListar())
+                    {
+                        if(escolhaTalento == t.GetId())
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            Console.WriteLine("===============================");
+                            Console.ResetColor();
+                            MenuSubTalento(t);
+                            k = 1;
+                        }
+                    }
+                }
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("===============================");
+                Console.ResetColor();
+            }
+            catch(Exception)
+            {
+                MenuTalento();
             }
         }
         static public void ArtfeatoListarNome()
