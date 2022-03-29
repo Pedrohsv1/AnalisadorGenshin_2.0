@@ -7,6 +7,7 @@ namespace AnalyzerGenshin
     {
         static void Main()
         {
+            Sistema.AbrirArquivo();
             int run;
             do
             {

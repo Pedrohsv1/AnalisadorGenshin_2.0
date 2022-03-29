@@ -1,5 +1,7 @@
-using System; 
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 
 namespace AnalyzerGenshin
@@ -10,6 +12,17 @@ namespace AnalyzerGenshin
         private static List<Personagem> personagens= new List<Personagem>();
         private static List<Talento> talentos = new List<Talento>();
 
+        public static void AbrirArquivo()
+        {
+            Arquivos<List<Artefato>> ArquivoArtefato = new Arquivos<List<Artefato>>();
+            artefatos = ArquivoArtefato.Abrir("Artefato.xml");
+
+            Arquivos<List<Personagem>> ArquivoPersonagem = new Arquivos<List<Personagem>>();
+            personagens = ArquivoPersonagem.Abrir("Artefato.xml");
+
+            Arquivos<List<Artefato>> ArquivoTalento = new Arquivos<List<Artefato>>();
+            artefatos = ArquivoTalento.Abrir("Artefato.xml");
+        }
         public static void PersonagemInserir(Personagem obj)
         {
             personagens.Add(obj);
