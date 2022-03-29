@@ -8,4 +8,8 @@
     <Email>pedrao.varela@gmail.com</Email>
     <Senha>a</Senha>
   </Usuario>
+  <Usuario>
+    <Email>b</Email>
+    <Senha>b</Senha>
+  </Usuario>
 </ArrayOfUsuario>
