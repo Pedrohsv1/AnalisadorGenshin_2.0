@@ -25,6 +25,11 @@ namespace AnalyzerGenshin
             get{return senha;}
             set{senha=value;}
         }
+        public int Id
+        {
+            get{return id;}
+            set{id=value;}
+        }
         public void SetEmail(string email)
         {
             this.email = email;

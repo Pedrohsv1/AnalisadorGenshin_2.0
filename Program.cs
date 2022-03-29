@@ -20,15 +20,7 @@ namespace AnalyzerGenshin
                 Console.WriteLine(erro.Message);
             }
             int login = Login();
-            try
-            {
-                Sistema.EscreverArquivoUsuario();
-            }
-            catch(Exception erro)
-            {
-                Console.WriteLine(erro.Message);
-            }
-            if (login != -1)
+            while(login != -1)
             {
                 try
                 {
@@ -60,8 +52,16 @@ namespace AnalyzerGenshin
                 {
                     Console.WriteLine(erro.Message);
                 }
+                login = Login();
             }
-               
+            try
+            {
+                Sistema.EscreverArquivoUsuario();
+            }
+            catch(Exception erro)
+            {
+                Console.WriteLine(erro.Message);
+            }       
         }
         static public int Menu()
         {
