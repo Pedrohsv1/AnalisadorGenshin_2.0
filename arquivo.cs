@@ -1,12 +1,16 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using System.Text;
+
 
 namespace AnalyzerGenshin
 {
     class Arquivos<T>
     {
-        public T Abrir(string nome)
+        public T Ler(string nome)
         {
             //T vai receber XML
             XmlSerializer x = new XmlSerializer(typeof(T));
@@ -16,7 +20,7 @@ namespace AnalyzerGenshin
             y.Close();
             return b;
         }
-        public void Salvar(string nome, T obj)
+        public void Escrever(string nome, T obj)
         {
             //XMl vai receber em formato T
             XmlSerializer x = new XmlSerializer(typeof(T));

@@ -1,4 +1,10 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using System.Text;
+
 
 namespace AnalyzerGenshin
 {
@@ -13,7 +19,7 @@ namespace AnalyzerGenshin
         private int idArtefato3;
         private int idArtefato4;
         private int idArtefato5;
-
+        public Personagem(){}
         public Personagem(int id, int level, string nome, string tipo, int idArtefato1, int idArtefato2, int idArtefato3, int idArtefato4, int idArtefato5)
         {
             this.id = id;
@@ -27,6 +33,51 @@ namespace AnalyzerGenshin
             this.idArtefato5 = idArtefato5;
         }
 
+        public int Id
+        {
+            get{return id;}
+            set{id=value;}
+        }
+        public string Nome
+        {
+            get{return nome;}
+            set{nome=value;}
+        }
+        public int Level
+        {
+            get{return level;}
+            set{level=value;}
+        }
+        public string Tipo
+        {
+            get{return tipo;}
+            set{tipo=value;}
+        }
+        public int IdArtefato1
+        {
+            get{return idArtefato1;}
+            set{idArtefato1=value;}
+        }
+        public int IdArtefato2
+        {
+            get{return idArtefato2;}
+            set{idArtefato2=value;}
+        }
+        public int IdArtefato3
+        {
+            get{return idArtefato3;}
+            set{idArtefato3=value;}
+        }
+        public int IdArtefato4
+        {
+            get{return idArtefato4;}
+            set{idArtefato4=value;}
+        }
+        public int IdArtefato5
+        {
+            get{return idArtefato5;}
+            set{idArtefato5=value;}
+        }
         public string GetNome()
         {
             return nome;

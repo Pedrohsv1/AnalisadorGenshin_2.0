@@ -3,25 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using System.Text;
 
 namespace AnalyzerGenshin
 {
     public class Sistema
     {
+        private static List<Usuario> usuarios = new List<Usuario>();
         private static List<Artefato> artefatos = new List<Artefato>();
         private static List<Personagem> personagens= new List<Personagem>();
         private static List<Talento> talentos = new List<Talento>();
 
-        public static void AbrirArquivo()
+        public static void LerArquivoUsuario()
+        {
+            Arquivos<List<Usuario>> ArquivoUsuario = new Arquivos<List<Usuario>>();
+            usuarios = ArquivoUsuario.Ler("Xmls/Users.xml");
+        }
+        public static void EscreverArquivoUsuario()
+        {
+            Arquivos<List<Usuario>> ArquivoUsuario = new Arquivos<List<Usuario>>();
+            ArquivoUsuario.Escrever("Xmls/Users.xml", usuarios);
+        }
+        public static void LerArquivo(int id)
         {
             Arquivos<List<Artefato>> ArquivoArtefato = new Arquivos<List<Artefato>>();
-            artefatos = ArquivoArtefato.Abrir("Artefato.xml");
+            artefatos = ArquivoArtefato.Ler($"Xmls/Artefato{id}.xml");
 
             Arquivos<List<Personagem>> ArquivoPersonagem = new Arquivos<List<Personagem>>();
-            personagens = ArquivoPersonagem.Abrir("Artefato.xml");
+            personagens = ArquivoPersonagem.Ler($"Xmls/Personagem{id}.xml");
 
-            Arquivos<List<Artefato>> ArquivoTalento = new Arquivos<List<Artefato>>();
-            artefatos = ArquivoTalento.Abrir("Artefato.xml");
+            Arquivos<List<Talento>> ArquivoTalento = new Arquivos<List<Talento>>();
+            talentos = ArquivoTalento.Ler($"Xmls/Talento{id}.xml");
+        }
+        public static void EscreverArquivo(int id)
+        {
+            Arquivos<List<Artefato>> ArquivoArtefato = new Arquivos<List<Artefato>>();
+            ArquivoArtefato.Escrever($"Xmls/Artefato{id}.xml", artefatos);
+
+            Arquivos<List<Personagem>> ArquivoPersonagem = new Arquivos<List<Personagem>>();
+            ArquivoPersonagem.Escrever($"Xmls/Personagem{id}.xml", personagens);
+
+            Arquivos<List<Talento>> ArquivoTalento = new Arquivos<List<Talento>>();
+            ArquivoTalento.Escrever($"Xmls/Talento{id}.xml", talentos);
         }
         public static void PersonagemInserir(Personagem obj)
         {
@@ -62,6 +85,18 @@ namespace AnalyzerGenshin
         public static List<Talento> TalentoListar()
         {
             return talentos;
+        }
+        public static void UsuarioInserir(Usuario obj)
+        {
+            usuarios.Add(obj);
+        }
+        public static void UsuarioExcluir(Usuario obj)
+        {
+            usuarios.Remove(obj);
+        }
+        public static List<Usuario> UsuarioListar()
+        {
+            return usuarios;
         }
     }
 }

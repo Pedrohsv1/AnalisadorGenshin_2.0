@@ -1,10 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using System.Text;
+
+
 namespace AnalyzerGenshin
 {
     public class Artefato : IComparable<Artefato>
     {
         private int id;
-        private int idPersonagem;
         private string nome;
         private string tipo;
         private string mainStatus;
@@ -18,6 +24,8 @@ namespace AnalyzerGenshin
         private double valorStatus3;
         private double valorStatus4;
 
+
+        public Artefato(){}
         public Artefato(int id, string nome, string tipo, string mainStatus, string status1, string status2, string status3, string status4, double valorMainStatus, double valorStatus1, double valorStatus2, double valorStatus3, double valorStatus4)
         {
             this.id = id;
@@ -34,10 +42,6 @@ namespace AnalyzerGenshin
             this.valorStatus3 = valorStatus3;
             this.valorStatus4 = valorStatus4;
         }
-        public void SetIdPersonagem(int idPersonagem)
-        {
-            this.idPersonagem = idPersonagem;
-        }
         public Artefato(string tipo)
         {
             this.tipo = tipo;
@@ -45,6 +49,71 @@ namespace AnalyzerGenshin
         public override string ToString()
         {
             return $"\n Id - {id}\n\n {tipo} | {nome}\n\n {mainStatus} - {valorMainStatus}\n\n {status1} - {valorStatus1}\n {status2} - {valorStatus2}\n {status3} - {valorStatus3}\n {status4} - {valorStatus4}";
+        }
+        public int Id
+        {
+            get{return id;}
+            set{id=value;}
+        }
+        public string Nome
+        {
+            get{return nome;}
+            set{nome=value;}
+        }
+        public string Tipo
+        {
+            get{return tipo;}
+            set{tipo=value;}
+        }
+        public string MainStatus
+        {
+            get{return mainStatus;}
+            set{mainStatus=value;}
+        }
+        public string Status1
+        {
+            get{return status1;}
+            set{status1=value;}
+        }
+        public string Status2
+        {
+            get{return status2;}
+            set{status2=value;}
+        }
+        public string Status3
+        {
+            get{return status3;}
+            set{status3=value;}
+        }
+        public string Status4
+        {
+            get{return status4;}
+            set{status4=value;}
+        }
+        public double ValorMainStatus
+        {
+            get{return valorMainStatus;}
+            set{valorMainStatus=value;}
+        }
+        public double ValorStatus1
+        {
+            get{return valorStatus1;}
+            set{valorStatus1=value;}
+        }
+        public double ValorStatus2
+        {
+            get{return valorStatus2;}
+            set{valorStatus2=value;}
+        }
+        public double ValorStatus3
+        {
+            get{return valorStatus3;}
+            set{valorStatus3=value;}
+        }
+        public double ValorStatus4
+        {
+            get{return valorStatus4;}
+            set{valorStatus4=value;}
         }
         public string GetTipo()
         {

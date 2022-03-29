@@ -1,5 +1,9 @@
-﻿using System; 
-
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using System.Text;
 
 namespace AnalyzerGenshin
 {
@@ -7,24 +11,57 @@ namespace AnalyzerGenshin
     {
         static void Main()
         {
-            Sistema.AbrirArquivo();
-            int run;
-            do
+            try
             {
-                run = Menu();
-                switch (run)
+                Sistema.LerArquivoUsuario();
+            }
+            catch(Exception erro)
+            {
+                Console.WriteLine(erro.Message);
+            }
+            int login = Login();
+            try
+            {
+                Sistema.EscreverArquivoUsuario();
+            }
+            catch(Exception erro)
+            {
+                Console.WriteLine(erro.Message);
+            }
+            if (login != -1)
+            {
+                try
                 {
-                    case 1: CadastrarPersonagem() ;break;
-                    case 2: CadastrarArtefato()   ;break;
-                    case 3: CadastrarTalento() ;break;
-                    case 4: MenuPersonagem() ;break;
-                    case 5: MenuArtefatos() ;break;
-                    case 6: MenuTalento() ;break;
-
+                    Sistema.LerArquivo(login);
                 }
-
-            } while (run != 0);
-            
+                catch(Exception)
+                {
+                    Console.WriteLine("Bem Vindo! Essa é a sua\nprimeira vez aqui?\ncadastre um personagem!");
+                }
+                int run;
+                do
+                {
+                    run = Menu();
+                    switch (run)
+                    {
+                        case 1: CadastrarPersonagem() ;break;
+                        case 2: CadastrarArtefato()   ;break;
+                        case 3: CadastrarTalento() ;break;
+                        case 4: MenuPersonagem() ;break;
+                        case 5: MenuArtefatos() ;break;
+                        case 6: MenuTalento() ;break;
+                    }
+                } while (run != 0);
+                try
+                {
+                    Sistema.EscreverArquivo(login);
+                }
+                catch(Exception erro)
+                {
+                    Console.WriteLine(erro.Message);
+                }
+            }
+               
         }
         static public int Menu()
         {
@@ -70,6 +107,130 @@ namespace AnalyzerGenshin
             }
             
             return M;
+        }
+        static public int Login()
+        {
+            try
+            {
+                int k = 0;
+                while(k == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("===============================");
+                    Console.ResetColor();
+                    Console.WriteLine(" Analyzer Genshin");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("===============================");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine("[1] Login");
+                    Console.WriteLine("[2] Cadastro");
+                    Console.WriteLine("[0] Sair");
+                    Console.WriteLine();
+                    Console.Write("Digite: ");
+                    int L = int.Parse(Console.ReadLine());
+                    while(L > 2 || L < 0)
+                    {
+                        Console.Write("Digite: ");
+                        L = int.Parse(Console.ReadLine());
+                    }
+                    if(L == 1)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine("-=-=-=-= Login =-=-=-=-");
+                        Console.WriteLine();
+                        Console.Write("Email: ");
+                        string emailLogin = Console.ReadLine();
+                        Console.WriteLine();
+                        Console.Write("Senha: ");
+                        string senhaLogin = Console.ReadLine();
+                        Console.WriteLine();
+                        
+                        foreach(Usuario u in Sistema.UsuarioListar())
+                        {
+                            if(emailLogin == u.GetEmail())
+                            {
+                                if(senhaLogin == u.GetSenha())
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Green;
+                                    Console.WriteLine("===============================");
+                                    Console.ResetColor();
+                                    return u.GetId();
+                                }
+                            }
+                        }
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("Senha ou Login Incorretos!");
+                        Console.ResetColor();
+                    }
+                    if(L == 2)
+                    {
+                        string x = "true"; 
+                        string emailCadastro = null;
+                        string senhaCadastro = null;
+                        int i = 0;
+                        while(x == "true")
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine("-=-=-=-= Cadastro =-=-=-=-");
+                            Console.WriteLine();
+                            Console.Write("Email: ");
+                            emailCadastro = Console.ReadLine();
+                            Console.WriteLine();
+                            Console.Write("Senha: ");
+                            senhaCadastro = Console.ReadLine();
+                            Console.WriteLine();
+                            foreach(Usuario u in Sistema.UsuarioListar())
+                            {
+                                if(emailCadastro == u.GetEmail())
+                                {
+                                    x = "x";
+                                    i++;
+                                    break;
+                                }
+                                else
+                                {
+                                    x = "false";
+                                    i++;
+                                }
+                            }
+                            if(i == 0)
+                            {
+                                x = "false";
+                            }                        
+                        }
+                        if(x == "false")
+                        {
+                            Usuario y = new Usuario(emailCadastro, senhaCadastro, i);
+                            Sistema.UsuarioInserir(y);
+                            Console.WriteLine();
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.WriteLine("Você foi Cadastrado!");
+                            Console.ResetColor();
+                            Console.WriteLine("===============================");
+                            Console.WriteLine();
+                        }
+                        if(x == "x")
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Esse email já está cadastrado!");
+                            Console.ResetColor();
+                        }
+                        
+                    }
+                    if(L == 0)
+                    {
+                        Console.WriteLine("===============================");
+                        return -1;
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Erro tente novamente!");
+            }
+            return -1;             
         }
         static public void CadastrarPersonagem()
         {
@@ -1109,7 +1270,7 @@ namespace AnalyzerGenshin
             int escolhaSubPersonagem = int.Parse(Console.ReadLine());
             try
             {
-                while(escolhaSubPersonagem < 0 || escolhaSubPersonagem > 4)
+                while(escolhaSubPersonagem < 0 || escolhaSubPersonagem > 5)
                 {
                     Console.WriteLine("Erro tente novamente, Digite:");
                     escolhaSubPersonagem = int.Parse(Console.ReadLine());
@@ -1119,10 +1280,6 @@ namespace AnalyzerGenshin
             catch(Exception)
             {
                 MenuSubPersonagem(p);
-            }
-            if(escolhaSubPersonagem == 0)
-            {
-                MenuPersonagem();
             }
             switch( escolhaSubPersonagem )
             { 

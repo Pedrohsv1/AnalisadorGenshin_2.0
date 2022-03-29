@@ -1,3 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using System.Text;
+
 namespace AnalyzerGenshin
 {
     public class Talento
@@ -6,7 +13,7 @@ namespace AnalyzerGenshin
         private int idPersonagem;
         private string nome;
         private int level;
-
+        public Talento(){}
         public Talento(int id, int idPersonagem, string nome, int level)
         {
             this.id = id;
@@ -17,6 +24,26 @@ namespace AnalyzerGenshin
         public override string ToString()
         {
             return $"\n Id : {id}\n Level : {level} | Nome : {nome}\n";
+        }
+        public int Id
+        {
+            get{return id;}
+            set{id=value;}
+        }
+        public string Nome
+        {
+            get{return nome;}
+            set{nome=value;}
+        }
+        public int IdPersonagem
+        {
+            get{return idPersonagem;}
+            set{idPersonagem=value;}
+        }
+        public int Level
+        {
+            get{return level;}
+            set{level=value;}
         }
         public int GetId()
         {
