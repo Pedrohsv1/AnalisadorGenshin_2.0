@@ -594,6 +594,8 @@ namespace AnalyzerGenshin
                 }
 
                 Console.WriteLine();
+                Console.WriteLine("===============================");
+                Console.WriteLine();
                 int contador = 0;
                 foreach(Personagem p in Sistema.PersonagemListar())
                 {
@@ -608,6 +610,8 @@ namespace AnalyzerGenshin
                     Console.ResetColor();
 
                 }
+                Console.WriteLine();
+                Console.WriteLine("===============================");
                 Console.WriteLine();
                 Console.Write("Id do Personagem: ");
                 idPerso = int.Parse(Console.ReadLine());
@@ -633,6 +637,80 @@ namespace AnalyzerGenshin
             }
             
 
+        }
+        static public void AtualizarTalento(Talento t)
+        {
+            try
+            {
+                int id, level, idPerso;
+                string nome;
+                Console.WriteLine("=-=-= Cadastro do Talento =-=-=");
+                Console.WriteLine();
+                Console.Write("Id: ");
+                id = int.Parse(Console.ReadLine());
+
+                Console.WriteLine();
+                Console.Write("Nome: ");
+
+                nome = Console.ReadLine();
+
+                Console.WriteLine();
+                Console.Write("Level [1-9]: ");
+
+                level = int.Parse(Console.ReadLine());
+                while(level < 1 || level > 9)
+                {
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Digite um número entre 1 e 9");
+                    Console.ResetColor();
+                    Console.Write("Level [1-9]: ");
+                    level = int.Parse(Console.ReadLine());
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("===============================");
+                Console.WriteLine();
+                int contador = 0;
+                foreach(Personagem p in Sistema.PersonagemListar())
+                {
+                    Console.WriteLine($"Nome : {p.GetNome()} - ID : {p.GetId()}");
+                    contador++;
+                }
+                if(contador == 0)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Ainda não tem Personagem cadastrado");
+                    Console.ResetColor();
+
+                }
+                Console.WriteLine();
+                Console.WriteLine("===============================");
+                Console.WriteLine();
+                Console.Write("Id do Personagem: ");
+                idPerso = int.Parse(Console.ReadLine());
+
+                t.SetId(id);
+                t.SetNome(nome);
+                t.SetLevel(level);
+                t.SetIdPersonagem(idPerso);
+
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("Talento Atualizado!");
+                Console.ResetColor();
+                Console.WriteLine();
+            }
+            catch(Exception)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Erro, Tente denovo.");
+                Console.ResetColor();
+                Console.WriteLine();
+                CadastrarTalento();
+            }
         }
         static public void AtualizarPersonagem(Personagem p)
         {
@@ -760,6 +838,25 @@ namespace AnalyzerGenshin
             Console.ResetColor();
             Console.WriteLine();
         }
+        static public void NomeTalento(Talento t)
+        {
+            Console.WriteLine("-=-= Talento Nome =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                string nome =Console.ReadLine();
+                t.SetNome(nome);
+            }
+            catch(Exception)
+            {
+                NomeTalento(t);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Nome Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
         static public void LevelPersonagem(Personagem p)
         {
             Console.WriteLine("-=-= Personagem Level =-=-");
@@ -772,6 +869,25 @@ namespace AnalyzerGenshin
             catch(Exception)
             {
                 LevelPersonagem(p);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Level Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void LevelTalento(Talento t)
+        {
+            Console.WriteLine("-=-= Talento Level =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                int level = int.Parse(Console.ReadLine());
+                t.SetLevel(level);
+            }
+            catch(Exception)
+            {
+                LevelTalento(t);
             }
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -810,6 +926,60 @@ namespace AnalyzerGenshin
             catch(Exception)
             {
                 IdArtefato(a);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Level Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void IdTalento(Talento t)
+        {
+            Console.WriteLine("-=-= Talento Id =-=-");
+            try
+            {
+                Console.WriteLine("Digite: ");
+                int id = int.Parse(Console.ReadLine());
+                t.SetId(id);
+            }
+            catch(Exception)
+            {
+                IdTalento(t);
+            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("Level Atuliazado!");
+            Console.ResetColor();
+            Console.WriteLine();
+        }
+        static public void IdPersonagemTalento(Talento t)
+        {
+            Console.WriteLine("-=-= Talento Id Personagem =-=-");
+            try
+            {
+                Console.WriteLine();
+                int contador = 0;
+                foreach(Personagem p in Sistema.PersonagemListar())
+                {
+                    Console.WriteLine($"Nome : {p.GetNome()} - ID : {p.GetId()}");
+                    contador++;
+                }
+                if(contador == 0)
+                {
+
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Ainda não tem Personagem cadastrado");
+                    Console.ResetColor();
+
+                }
+                Console.WriteLine();
+                Console.WriteLine("Digite: ");
+                int id = int.Parse(Console.ReadLine());
+                t.SetIdPersonagem(id);
+            }
+            catch(Exception)
+            {
+                IdPersonagemTalento(t);
             }
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -927,7 +1097,8 @@ namespace AnalyzerGenshin
             Console.WriteLine("[1] Mudar Dados");
             Console.WriteLine("[2] Artefatos");
             Console.WriteLine("[3] Listar Dados");
-            Console.Write("[4] ");
+            Console.WriteLine("[4] Listar Talentos");
+            Console.Write("[5] ");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("Excluir");
             Console.WriteLine("[0] Voltar");
@@ -957,7 +1128,8 @@ namespace AnalyzerGenshin
                 case 1: MenuMudarDados(p); break;
                 case 2: MenuPersonagemArtefato(p); break;
                 case 3: Console.WriteLine(p); MenuSubPersonagem(p); break;
-                case 4: Sistema.PersonagemExcluir(p); break;
+                case 4: ListarTalentoPersonagem(p.GetId()); MenuSubPersonagem(p); break;
+                case 5: Sistema.PersonagemExcluir(p); break;
             }
         }
         static public void MenuMudarDados(Personagem p)
@@ -1038,17 +1210,19 @@ namespace AnalyzerGenshin
                 case 0: MenuSubArtefato(a); break;
             }
         }
-        static public void MenuMudarTalento(Artefato a)
+        static public void MenuMudarTalento(Talento t)
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write($"{a.GetNome()}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write($"{t.GetNome()}");
             Console.ResetColor();
-            Console.WriteLine($" | {a.GetTipo()} - ID : {a.GetId()}");
+            Console.WriteLine($" - ID : {t.GetId()}");
             Console.WriteLine();
             Console.WriteLine("[1] Reset");
             Console.WriteLine("[2] Mudar o Nome");
             Console.WriteLine("[3] Mudar o ID");
+            Console.WriteLine("[4] Mudar o Level");
+            Console.WriteLine("[5] Mudar o Personagem [id]");
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine("[0] Voltar");
             Console.ResetColor();
@@ -1057,7 +1231,7 @@ namespace AnalyzerGenshin
             int escolhaMudarDados = int.Parse(Console.ReadLine());
             try
             {
-                while(escolhaMudarDados < 0 || escolhaMudarDados > 3)
+                while(escolhaMudarDados < 0 || escolhaMudarDados > 4)
                 {
                     Console.WriteLine("Erro tente novamente, Digite:");
                     escolhaMudarDados = int.Parse(Console.ReadLine());
@@ -1066,14 +1240,16 @@ namespace AnalyzerGenshin
             }
             catch(Exception)
             {
-                MenuMudarArtefato(a);
+                MenuMudarTalento(t);
             }
             switch(escolhaMudarDados)
             {
-                case 1: AtualizarArtefato(a); MenuMudarArtefato(a); break;
-                case 2: NomeArtefato(a); MenuMudarArtefato(a); break;
-                case 3: IdArtefato(a); MenuMudarArtefato(a); break;
-                case 0: MenuSubArtefato(a); break;
+                case 1: AtualizarTalento(t); MenuMudarTalento(t); break;
+                case 2: NomeTalento(t); MenuMudarTalento(t); break;
+                case 3: IdTalento(t); MenuMudarTalento(t); break;
+                case 4: LevelTalento(t); MenuMudarTalento(t); break;
+                case 5: IdPersonagemTalento(t); MenuMudarTalento(t); break;
+                case 0: MenuSubTalento(t); break;
             }
         }
         static public void MenuPersonagemArtefato(Personagem p)
@@ -1299,10 +1475,10 @@ namespace AnalyzerGenshin
         static public void MenuSubTalento(Talento t)
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.Red;
             Console.Write($"{t.GetNome()}");
             Console.ResetColor();
-            Console.WriteLine($" | {t.GetLevel()} - ID : {t.GetId()}");
+            Console.WriteLine($" - ID : {t.GetId()}");
             Console.WriteLine();
             Console.WriteLine("[1] Mudar Dados");
             Console.WriteLine("[2] Listar Dados");
@@ -1333,6 +1509,7 @@ namespace AnalyzerGenshin
             }
             switch( escolhaSubArtefato )
             { 
+                case 1: MenuMudarTalento(t); break;
                 case 2: Console.WriteLine(t); MenuSubTalento(t); break;
                 case 3: Sistema.TalentoExcluir(t); break;
             }
@@ -1568,5 +1745,21 @@ namespace AnalyzerGenshin
             Artefato Art = new Artefato("None");
             return Art;
         }
+        static public void ListarTalentoPersonagem(int id)
+        {
+            int i = 1;
+            foreach(Talento t in Sistema.TalentoListar())
+            {
+                
+                if(t.GetIdPersonagem() == id)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"TALENTO {i}");
+                    Console.WriteLine(t);
+                    i++;
+                }
+            }
+        }
+
     }
 }

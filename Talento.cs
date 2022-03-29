@@ -16,19 +16,39 @@ namespace AnalyzerGenshin
         }
         public override string ToString()
         {
-            return $"\n Id - {id}\n Level : {level} | Nome : {nome}\n";
+            return $"\n Id : {id}\n Level : {level} | Nome : {nome}\n";
         }
         public int GetId()
         {
             return id;
         }
+        public int GetIdPersonagem()
+        {
+            return idPersonagem;
+        }
         public string GetNome()
         {
             return nome;
         }
-        public int GetLevel()
+        public int SetLevel()
         {
             return level;
+        }
+        public void SetId(int id)
+        {
+            this.id = id;
+        }
+        public void SetIdPersonagem(int idPersonagem)
+        {
+            this.idPersonagem = idPersonagem;
+        }
+        public void SetNome(string nome)
+        {
+            this.nome = nome;
+        }
+        public void SetLevel(int level)
+        {
+            this.level =  level;
         }
     }
 }
