@@ -473,11 +473,13 @@ namespace AnalyzerGenshin
                     {
                         Console.WriteLine();
                         Console.WriteLine("Flor é unicamente VIDA FLAT.");
+                        mainStatus = "HP FLAT";
                     }
                     if ( j == 2)
                     {
                         Console.WriteLine();
                         Console.WriteLine("Pena é unicamente ATQ FLAT.");
+                        mainStatus = "ATQ FLAT";
                     }
                 }
 
